@@ -1760,3 +1760,26 @@ select {
     display: none;
   }
 }
+
+/* ---------- Transaction modal: white selection + white button ---------- */
+
+.modal .type-switch button.active {
+  background: #ffffff;
+  color: #000000;
+}
+
+.modal .type-switch button.active.expense,
+.modal .type-switch button.active.income {
+  background: #ffffff;
+  color: #000000;
+}
+
+.modal .type-switch button.active:hover {
+  filter: brightness(0.95);
+}
+
+.modal .btn-primary {
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid var(--border);
+}

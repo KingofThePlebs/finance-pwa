@@ -296,15 +296,6 @@ function App() {
             />
           )}
         </div>
-
-      <button
-        className={`mobile-settings ${view === "settings" ? "active" : ""}`}
-        onClick={toggleSettings}
-        title="Nastavení"
-      >
-        <IconSettings />
-        <span>{view === "settings" ? "Zpět do aplikace" : "Nastavení"}</span>
-      </button>
       </main>
 
       <nav className="mobile-tabbar">
@@ -319,6 +310,14 @@ function App() {
             <span>{item.label}</span>
           </button>
         ))}
+        <button
+          className={`mobile-tab ${view === "settings" ? "active" : ""}`}
+          onClick={toggleSettings}
+          title="Nastavení"
+        >
+          <IconSettings />
+          <span>Nastavení</span>
+        </button>
       </nav>
 
       <button className="fab" onClick={() => openAdd()} title="Nová položka">

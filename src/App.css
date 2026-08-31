@@ -1726,36 +1726,7 @@ select {
   }
 }
 
-.mobile-settings {
-  display: none;
-}
-
 @media (max-width: 640px) {
-  .mobile-settings {
-    display: flex;
-    position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 14px;
-    z-index: 40;
-    align-items: center;
-    gap: 6px;
-    padding: 10px 18px;
-    border: none;
-    border-radius: 24px;
-    background: var(--fab-bg, #ffffff);
-    color: var(--fab-color, #000000);
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
-  }
-
-  .mobile-settings.active {
-    background: var(--fab-color, #000000);
-    color: var(--fab-bg, #ffffff);
-  }
-
   .sidebar-footer .settings-nav {
     display: none;
   }
@@ -1838,14 +1809,6 @@ select {
 
   .main {
     padding-bottom: 88px;
-  }
-
-  .mobile-settings {
-    bottom: 84px;
-  }
-
-  .mobile-settings span {
-    display: none;
   }
 
   .fab {

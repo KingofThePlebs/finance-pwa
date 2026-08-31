@@ -297,15 +297,29 @@ function App() {
           )}
         </div>
 
-        <button
-          className={`mobile-settings ${view === "settings" ? "active" : ""}`}
-          onClick={toggleSettings}
-          title="Nastavení"
-        >
-          <IconSettings />
-          <span>{view === "settings" ? "Zpět do aplikace" : "Nastavení"}</span>
-        </button>
+      <button
+        className={`mobile-settings ${view === "settings" ? "active" : ""}`}
+        onClick={toggleSettings}
+        title="Nastavení"
+      >
+        <IconSettings />
+        <span>{view === "settings" ? "Zpět do aplikace" : "Nastavení"}</span>
+      </button>
       </main>
+
+      <nav className="mobile-tabbar">
+        {NAV.map((item) => (
+          <button
+            key={item.id}
+            className={`mobile-tab ${view === item.id ? "active" : ""}`}
+            onClick={() => goTo(item.id)}
+            title={item.label}
+          >
+            {item.icon}
+            <span>{item.label}</span>
+          </button>
+        ))}
+      </nav>
 
       <button className="fab" onClick={() => openAdd()} title="Nová položka">
         <IconPlus size={24} />

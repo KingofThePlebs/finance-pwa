@@ -1783,3 +1783,72 @@ select {
   color: #000000;
   border: 1px solid var(--border);
 }
+
+/* ---------- mobile bottom tab bar ---------- */
+
+.mobile-tabbar {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .sidebar .nav {
+    display: none;
+  }
+
+  .mobile-tabbar {
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 45;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 6px 4px
+      calc(6px + env(safe-area-inset-bottom, 0px));
+    justify-content: space-around;
+  }
+
+  .mobile-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    flex: 1;
+    min-width: 0;
+    border: none;
+    background: transparent;
+    padding: 4px 2px;
+    font-size: 0.62rem;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+    border-radius: 10px;
+  }
+
+  .mobile-tab svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  .mobile-tab.active {
+    color: var(--text);
+    background: var(--surface-2);
+  }
+
+  .main {
+    padding-bottom: 88px;
+  }
+
+  .mobile-settings {
+    bottom: 84px;
+  }
+
+  .mobile-settings span {
+    display: none;
+  }
+
+  .fab {
+    bottom: 96px;
+  }
+}

@@ -48,6 +48,7 @@ function App() {
   const [store, setStore] = useState<Store | null>(null);
   const [theme, setTheme] = useState<Theme>("light");
   const [view, setView] = useState<View>("overview");
+  const [prevView, setPrevView] = useState<View>("overview");
   const [modalOpen, setModalOpen] = useState(false);
   const [editing, setEditing] = useState<Transaction | null>(null);
   const [prefillDate, setPrefillDate] = useState<string | null>(null);
@@ -192,6 +193,22 @@ function App() {
     setModalOpen(true);
   }
 
+  function goTo(v: View) {
+    if (v === "settings" && view !== "settings") {
+      setPrevView(view);
+    }
+    setView(v);
+  }
+
+  function toggleSettings() {
+    if (view === "settings") {
+      setView(prevView);
+    } else {
+      setPrevView(view);
+      setView("settings");
+    }
+  }
+
   if (!store) {
     return <div className="loading">Načítám…</div>;
   }
@@ -209,7 +226,7 @@ function App() {
             <button
               key={item.id}
               className={`nav-item ${view === item.id ? "active" : ""}`}
-              onClick={() => setView(item.id)}
+              onClick={() => goTo(item.id)}
               title={item.label}
             >
               {item.icon}
@@ -220,8 +237,8 @@ function App() {
 
         <div className="sidebar-footer">
           <button
-            className={`nav-item ${view === "settings" ? "active" : ""}`}
-            onClick={() => setView("settings")}
+            className={`nav-item settings-nav ${view === "settings" ? "active" : ""}`}
+            onClick={toggleSettings}
             title="Nastavení"
           >
             <IconSettings />
@@ -279,6 +296,15 @@ function App() {
             />
           )}
         </div>
+
+        <button
+          className={`mobile-settings ${view === "settings" ? "active" : ""}`}
+          onClick={toggleSettings}
+          title="Nastavení"
+        >
+          <IconSettings />
+          <span>{view === "settings" ? "Zpět do aplikace" : "Nastavení"}</span>
+        </button>
       </main>
 
       <button className="fab" onClick={() => openAdd()} title="Nová položka">

@@ -12,17 +12,21 @@ const CURRENCIES = [
 const VIEWS = [
   { id: "overview", label: "Přehled" },
   { id: "statistics", label: "Statistiky" },
-  { id: "investments", label: "Investování" },
+  { id: "investments", label: "Osobní plán" },
   { id: "categories", label: "Kategorie" },
   { id: "data", label: "Data" },
 ];
 
 export function Settings({
   store,
+  theme,
+  onToggleTheme,
   onUpdateSettings,
   onResetData,
 }: {
   store: Store;
+  theme: "light" | "dark";
+  onToggleTheme: () => void;
   onUpdateSettings: (currency: string, defaultView: string) => void;
   onResetData: () => void;
 }) {
@@ -50,6 +54,27 @@ export function Settings({
 
   return (
     <div className="settings-wrap">
+      <div className="card">
+        <h3>Vzhled</h3>
+        <p className="panel-hint">Přepínání mezi tmavým a světlým režimem.</p>
+        <div className="settings-group">
+          <div className="theme-tabs">
+            <button
+              className={`theme-tab ${theme === "light" ? "active" : ""}`}
+              onClick={() => theme === "dark" && onToggleTheme()}
+            >
+              Světlý
+            </button>
+            <button
+              className={`theme-tab ${theme === "dark" ? "active" : ""}`}
+              onClick={() => theme === "light" && onToggleTheme()}
+            >
+              Tmavý
+            </button>
+          </div>
+        </div>
+      </div>
+
       <div className="card">
         <h3>Měna</h3>
         <div className="settings-group">

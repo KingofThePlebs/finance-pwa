@@ -1815,3 +1815,116 @@ select {
     bottom: 96px;
   }
 }
+
+/* ---------- Personal plan: test, results, saving plan ---------- */
+
+.plan-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.plan-question {
+  margin-bottom: 18px;
+}
+
+.plan-q-label {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.survey-scale {
+  display: flex;
+  gap: 6px;
+  width: 100%;
+}
+
+.sq {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  flex: 1;
+  padding: 8px 4px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.sq-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  transition: all 0.15s;
+}
+
+.sq-num {
+  font-size: 0.78rem;
+  font-weight: 650;
+  color: var(--muted);
+}
+
+.sq.active {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+.sq.active .sq-icon {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.sq.active .sq-num {
+  color: var(--accent);
+}
+
+.survey-ends {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.plan-num-input {
+  width: 100%;
+}
+
+.plan-results {
+  margin-top: 4px;
+}
+
+/* ---------- Settings: theme tabs ---------- */
+
+.theme-tabs {
+  display: flex;
+  gap: 8px;
+  background: var(--surface-2);
+  border-radius: 12px;
+  padding: 4px;
+}
+
+.theme-tab {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 9px;
+  border-radius: 9px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--muted);
+  transition: all 0.2s;
+}
+
+.theme-tab.active {
+  background: #ffffff;
+  color: #000000;
+  box-shadow: var(--shadow);
+}

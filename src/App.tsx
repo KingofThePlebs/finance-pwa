@@ -7,15 +7,13 @@ import { Statistics } from "./components/Statistics";
 import { CategoriesPanel, DataPanel } from "./components/Panels";
 import { TransactionModal } from "./components/TransactionModal";
 import { Settings } from "./components/Settings";
-import { Investments } from "./components/Investments";
+import { PersonalPlan } from "./components/PersonalPlan";
 import {
   IconChart,
   IconDownload,
   IconInvest,
-  IconMoon,
   IconPlus,
   IconSettings,
-  IconSun,
   IconTag,
   IconTrend,
 } from "./components/icons";
@@ -28,7 +26,7 @@ type View = "overview" | "statistics" | "investments" | "categories" | "data" | 
 const NAV: { id: View; label: string; icon: React.ReactNode }[] = [
   { id: "overview", label: "Přehled", icon: <IconChart /> },
   { id: "statistics", label: "Statistiky", icon: <IconTrend /> },
-  { id: "investments", label: "Investování", icon: <IconInvest /> },
+  { id: "investments", label: "Osobní plán", icon: <IconInvest /> },
   { id: "categories", label: "Kategorie", icon: <IconTag /> },
   { id: "data", label: "Data", icon: <IconDownload /> },
 ];
@@ -36,7 +34,7 @@ const NAV: { id: View; label: string; icon: React.ReactNode }[] = [
 const TITLES: Record<View, string> = {
   overview: "Přehled",
   statistics: "Statistiky",
-  investments: "Investování",
+  investments: "Osobní plán",
   categories: "Kategorie",
   data: "Záloha a export",
   settings: "Nastavení",
@@ -244,14 +242,6 @@ function App() {
             <IconSettings />
             <span className="nav-label">Nastavení</span>
           </button>
-          <button
-            className="nav-item theme-toggle"
-            onClick={() => setTheme((t) => (t === "light" ? "dark" : "light"))}
-            title="Přepnout režim"
-          >
-            {theme === "light" ? <IconMoon /> : <IconSun />}
-            <span className="nav-label">{theme === "light" ? "Tmavý režim" : "Světlý režim"}</span>
-          </button>
         </div>
       </aside>
 
@@ -272,9 +262,7 @@ function App() {
 
           {view === "statistics" && <Statistics store={store} />}
 
-          {view === "investments" && (
-            <Investments store={store} onStore={applyStore} onToast={toast} />
-          )}
+          {view === "investments" && <PersonalPlan />}
 
           {view === "categories" && (
             <CategoriesPanel
@@ -291,6 +279,8 @@ function App() {
           {view === "settings" && (
             <Settings
               store={store}
+              theme={theme}
+              onToggleTheme={() => setTheme((t) => (t === "light" ? "dark" : "light"))}
               onUpdateSettings={handleUpdateSettings}
               onResetData={handleResetData}
             />

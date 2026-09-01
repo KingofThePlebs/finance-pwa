@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   ResponsiveContainer,
   AreaChart,
@@ -263,18 +263,51 @@ function InvestmentCalculator() {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Persist test answers in localStorage                                */
+/* ------------------------------------------------------------------ */
+
+const PLAN_KEY = "finance.plan.v1";
+
+interface PlanData {
+  scale: Record<string, number>;
+  salary: string;
+  expenses: string;
+  goal: string;
+  goalYears: string;
+}
+
+function loadPlan(): PlanData {
+  try {
+    const raw = localStorage.getItem(PLAN_KEY);
+    if (!raw) return { scale: {}, salary: "", expenses: "", goal: "", goalYears: "1" };
+    return { ...{ scale: {}, salary: "", expenses: "", goal: "", goalYears: "1" }, ...JSON.parse(raw) };
+  } catch {
+    return { scale: {}, salary: "", expenses: "", goal: "", goalYears: "1" };
+  }
+}
+
+function savePlan(data: PlanData) {
+  localStorage.setItem(PLAN_KEY, JSON.stringify(data));
+}
+
+/* ------------------------------------------------------------------ */
 /*  Hlavní komponenta: Osobní plán                                       */
 /* ------------------------------------------------------------------ */
 
 export function PersonalPlan() {
+  const saved = loadPlan();
   /* Škálové odpovědi: id → 1..5 */
-  const [scale, setScale] = useState<Record<string, number>>({});
+  const [scale, setScale] = useState<Record<string, number>>(saved.scale);
   /* Číselné odpovědi */
-  const [salary, setSalary] = useState("");
-  const [expenses, setExpenses] = useState("");
+  const [salary, setSalary] = useState(saved.salary);
+  const [expenses, setExpenses] = useState(saved.expenses);
   /* Šetřicí plán */
-  const [goal, setGoal] = useState("");
-  const [goalYears, setGoalYears] = useState("1");
+  const [goal, setGoal] = useState(saved.goal);
+  const [goalYears, setGoalYears] = useState(saved.goalYears);
+
+  useEffect(() => {
+    savePlan({ scale, salary, expenses, goal, goalYears });
+  }, [scale, salary, expenses, goal, goalYears]);
 
   const answeredScale = SCALE_QUESTIONS.every((q) => typeof scale[q.id] === "number");
   const salaryNum = parseFloat(salary.replace(/\s/g, "").replace(",", "."));
